@@ -30,11 +30,14 @@
                             {
                                 List<SoftwareHouse> softwareHouses = db.SoftwareHouse.ToList<SoftwareHouse>();
 
+                                
+
                                 foreach (SoftwareHouse softwareHouse in softwareHouses)
                                 {
                                     Console.WriteLine("- " + softwareHouse.ToString());
                                 }
                             }
+                            Console.WriteLine("=================================================================");
 
                             // Raccolgo i dati per il nuovo videogioco
                             Console.WriteLine("Insert Videogame details: ");
@@ -74,6 +77,8 @@
                                 }
                             }
                         }
+                        Console.WriteLine(); 
+                        Console.WriteLine();
                         break;
 
                     case 2:
@@ -96,6 +101,8 @@
                             }
                         }
                         break;
+                        Console.WriteLine();
+                        Console.WriteLine();
                     case 3:
                         {
                             Console.Write("Insert a string: ");
@@ -106,8 +113,13 @@
 
                                 try
                                 {
-                                    Videogame videogame = db.Videogame.Find(videogameString).ToList()<Videogame>;
-                                    Console.WriteLine($"The Videogame that match your selected ID is: {videogame.Name}");
+                                    List<Videogame> videogame = db.Videogame.Where(videogame => videogame.Name.Contains(videogameString)).ToList();
+                                    foreach (Videogame v in videogame)
+                                    {
+                                        Console.WriteLine($"The Videogame that match your selection is: {v.Name}");
+
+                                    }
+
 
                                 }
                                 catch (Exception ex)
@@ -118,6 +130,8 @@
                             break;
 
                         }
+                        Console.WriteLine();
+                        Console.WriteLine();
                     case 4:
                         {
                             using (VideogameContext db = new VideogameContext())
@@ -129,6 +143,8 @@
                                     Console.WriteLine("- " + videogame.ToString());
                                 }
                             }
+                            Console.WriteLine("=================================================================");
+
                             Console.Write("Insert Videogame ID to delete: ");
                             long videogameIdToDelete = long.Parse(Console.ReadLine());
 
@@ -151,6 +167,8 @@
 
                             break;
                         }
+                        Console.WriteLine();
+                        Console.WriteLine();
                     case 5:
                         {
                             // Raccolgo i dati per la nuova Software House
@@ -186,12 +204,14 @@
                             }
                             break;
                         }
-
-
-
-
+                        Console.WriteLine();
+                        Console.WriteLine();
+                    case 6:
+                        {
+                            return;
+                            break;
+                        }
                 }
-
             }
         }
     }
